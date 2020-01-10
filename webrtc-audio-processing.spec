@@ -1,13 +1,10 @@
 Name:		webrtc-audio-processing
 Version:	0.3.1
-Release:        2
+Release:        3
 Summary:	Real-Time Communication Library for Web Browsers
 License:	BSD and MIT
 URL:		https://www.freedesktop.org/software/pulseaudio/webrtc-audio-processing/
 Source0:	https://freedesktop.org/software/pulseaudio/webrtc-audio-processing/%{name}-%{version}.tar.xz
-
-Patch0:         webrtc-fix-typedefs-on-other-arches.patch
-Patch1:         webrtc-audio-processing-0.2-big-endian.patch
 
 BuildRequires:	autoconf automake libtool gcc gcc-c++
 
@@ -64,5 +61,8 @@ autoreconf -vif
 %doc NEWS
 
 %changelog
+* Fri Jan 10 2020 zhangrui <zhangrui182@huawei.com> - 0.3.1-3
+- Remove unnecessary patches
+
 * Fri Sep 6 2019 openEuler Buildteam <buildteam@openeuler.org> - 0.3.1-2
 - Package init
