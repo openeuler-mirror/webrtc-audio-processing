@@ -1,10 +1,11 @@
 Name:		webrtc-audio-processing
 Version:	0.3.1
-Release:        3
+Release:        4
 Summary:	Real-Time Communication Library for Web Browsers
 License:	BSD and MIT
 URL:		https://www.freedesktop.org/software/pulseaudio/webrtc-audio-processing/
 Source0:	https://freedesktop.org/software/pulseaudio/webrtc-audio-processing/%{name}-%{version}.tar.xz
+Patch:		huawei-support-riscv.patch
 
 BuildRequires:	autoconf automake libtool gcc gcc-c++
 
@@ -61,6 +62,9 @@ autoreconf -vif
 %doc NEWS
 
 %changelog
+* Mon Nov 9 2020  yangyanchao <yangyanchao6@huawei.com> - 0.3.1-4
+- Supports the riscv
+
 * Fri Jan 10 2020 zhangrui <zhangrui182@huawei.com> - 0.3.1-3
 - Remove unnecessary patches
 
