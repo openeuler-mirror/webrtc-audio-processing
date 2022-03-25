@@ -1,6 +1,6 @@
 Name:		webrtc-audio-processing
 Version:	1.0
-Release:        2
+Release:        3
 Summary:	Real-Time Communication Library for Web Browsers
 License:	BSD and MIT
 URL:		https://www.freedesktop.org/software/pulseaudio/webrtc-audio-processing/
@@ -10,7 +10,7 @@ Source0:	https://freedesktop.org/software/pulseaudio/webrtc-audio-processing/%{n
 Patch6000:	Backport-Use-cmake-to-look-up-abseil-dependency.patch
 
 BuildRequires:	autoconf automake libtool gcc gcc-c++
-BuildRequires:  meson abseil-cpp-devel cmake webrtc-audio-processing-devel
+BuildRequires:  meson abseil-cpp-devel cmake 
 Requires:       abseil-cpp
 
 %description
@@ -39,15 +39,12 @@ Header files for webrtc-audio-processing
 %install
 %meson_install
 
-cp -a %{_libdir}/libwebrtc_audio_processing.so.1* %{buildroot}%{_libdir}
-
 %files
 %defattr(-,root,root)
 %doc README.md AUTHORS
 %license COPYING
 %{_libdir}/libwebrtc-audio-processing-1.so.*
 %{_libdir}/libwebrtc-audio-coding-1.so.*
-%{_libdir}/libwebrtc_audio_processing.so.1*
 
 %files          devel
 %defattr(-,root,root)
@@ -60,7 +57,10 @@ cp -a %{_libdir}/libwebrtc_audio_processing.so.1* %{buildroot}%{_libdir}
 %doc NEWS
 
 %changelog
-* Wed Dec 22 2021 wangkerong <wangkerong@huawei.com> - 1.0-1-1
+* Fri Mar 25 2022 wangkerong <wangkerong@h-partners.com> - 1.0-3
+- remove self-dependency
+
+* Wed Dec 22 2021 wangkerong <wangkerong@huawei.com> - 1.0-2
 - add the missing libwebrtc_audio_processing.so.1 fix building error
 
 * Wed Dec 08 2021 wangkerong <wangkerong@huawei.com> - 1.0-1
