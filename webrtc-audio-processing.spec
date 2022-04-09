@@ -1,10 +1,11 @@
 Name:		webrtc-audio-processing
 Version:	1.0
-Release:        2
+Release:	3
 Summary:	Real-Time Communication Library for Web Browsers
 License:	BSD and MIT
 URL:		https://www.freedesktop.org/software/pulseaudio/webrtc-audio-processing/
 Source0:	https://freedesktop.org/software/pulseaudio/webrtc-audio-processing/%{name}-%{version}.tar.gz
+Patch1:		support-riscv.patch
 
 # fix building failed
 Patch6000:	Backport-Use-cmake-to-look-up-abseil-dependency.patch
@@ -60,6 +61,9 @@ cp -a %{_libdir}/libwebrtc_audio_processing.so.1* %{buildroot}%{_libdir}
 %doc NEWS
 
 %changelog
+* Sat Apr 9 2022 gym369 <gym487@163.com> - 1.0-3
+- Repatch for RISC-V
+
 * Wed Dec 22 2021 wangkerong <wangkerong@huawei.com> - 1.0-1-1
 - add the missing libwebrtc_audio_processing.so.1 fix building error
 
