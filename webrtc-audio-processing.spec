@@ -1,13 +1,18 @@
 Name:		webrtc-audio-processing
-Version:	0.3.1
-Release:        5
+Version:	1.0
+Release:	3
 Summary:	Real-Time Communication Library for Web Browsers
 License:	BSD and MIT
 URL:		https://www.freedesktop.org/software/pulseaudio/webrtc-audio-processing/
-Source0:	https://freedesktop.org/software/pulseaudio/webrtc-audio-processing/%{name}-%{version}.tar.xz
+Source0:	https://freedesktop.org/software/pulseaudio/webrtc-audio-processing/%{name}-%{version}.tar.gz
 Patch1:		support-riscv.patch
 
+# fix building failed
+Patch6000:	Backport-Use-cmake-to-look-up-abseil-dependency.patch
+
 BuildRequires:	autoconf automake libtool gcc gcc-c++
+BuildRequires:  meson abseil-cpp-devel cmake webrtc-audio-processing-devel
+Requires:       abseil-cpp
 
 %description
 WebRTC is an open source project that enables web browsers with Real-Time
@@ -29,39 +34,42 @@ Header files for webrtc-audio-processing
 %autosetup -n %{name}-%{version} -p1
 
 %build
-autoreconf -vif
-%configure \
-%ifarch %{arm} aarch64
-  --enable-neon=no \
-%endif
-  --disable-silent-rules 
-%make_build
+%meson
+%meson_build
 
 %install
-%make_install
+%meson_install
 
-%delete_la
-
-%ldconfig_scriptlets
+cp -a %{_libdir}/libwebrtc_audio_processing.so.1* %{buildroot}%{_libdir}
 
 %files
 %defattr(-,root,root)
 %doc README.md AUTHORS
 %license COPYING
+%{_libdir}/libwebrtc-audio-processing-1.so.*
+%{_libdir}/libwebrtc-audio-coding-1.so.*
 %{_libdir}/libwebrtc_audio_processing.so.1*
 
 %files          devel
 %defattr(-,root,root)
-%{_libdir}/*.a
-%{_libdir}/pkgconfig/%{name}.pc
-%{_libdir}/libwebrtc_audio_processing.so
-%{_includedir}/webrtc_audio_processing/webrtc/*
-
+%{_libdir}/pkgconfig/*.pc
+%{_libdir}/*.so
+%{_includedir}/webrtc-audio-processing-1/*
+ 
 %files          help
 %defattr(-,root,root)
 %doc NEWS
 
 %changelog
+* Sat Apr 9 2022 gym369 <gym487@163.com> - 1.0-3
+- Repatch for RISC-V
+
+* Wed Dec 22 2021 wangkerong <wangkerong@huawei.com> - 1.0-1-1
+- add the missing libwebrtc_audio_processing.so.1 fix building error
+
+* Wed Dec 08 2021 wangkerong <wangkerong@huawei.com> - 1.0-1
+- update to 1.0
+
 * Fri Nov 20 2020  yangyanchao <yangyanchao6@huawei.com> - 0.3.1-5
 - Cleancode: add patch id, change patch name 
 
