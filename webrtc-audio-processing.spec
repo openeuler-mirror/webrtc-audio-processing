@@ -1,6 +1,6 @@
 Name:		webrtc-audio-processing
 Version:	1.0
-Release:        3
+Release:        4
 Summary:	Real-Time Communication Library for Web Browsers
 License:	BSD and MIT
 URL:		https://www.freedesktop.org/software/pulseaudio/webrtc-audio-processing/
@@ -8,7 +8,9 @@ Source0:	https://freedesktop.org/software/pulseaudio/webrtc-audio-processing/%{n
 
 # fix building failed
 Patch6000:	Backport-Use-cmake-to-look-up-abseil-dependency.patch
-
+%ifarch loongarch64
+Patch0001:      webrtc-fix-typedefs-on-other-arches.patch
+%endif
 BuildRequires:	autoconf automake libtool gcc gcc-c++
 BuildRequires:  meson abseil-cpp-devel cmake 
 Requires:       abseil-cpp
@@ -57,6 +59,9 @@ Header files for webrtc-audio-processing
 %doc NEWS
 
 %changelog
+* Mon Nov 14 2022 huajingyun <huajingyun@loongson.cn> - 1.0-4
+- Add support of loongarch64
+
 * Fri Mar 25 2022 wangkerong <wangkerong@h-partners.com> - 1.0-3
 - remove self-dependency
 
