@@ -1,6 +1,6 @@
 Name:		webrtc-audio-processing
 Version:	1.0
-Release:        5
+Release:        6
 Summary:	Real-Time Communication Library for Web Browsers
 License:	BSD and MIT
 URL:		https://www.freedesktop.org/software/pulseaudio/webrtc-audio-processing/
@@ -8,7 +8,9 @@ Source0:	https://freedesktop.org/software/pulseaudio/webrtc-audio-processing/%{n
 
 # fix building failed
 Patch6000:	Backport-Use-cmake-to-look-up-abseil-dependency.patch
+%ifarch sw_64
 Patch6001:      webrtc-audio-processing-1.0-sw.patch
+%endif
 %ifarch loongarch64
 Patch6002:      webrtc-fix-typedefs-on-other-arches.patch
 %endif
@@ -60,6 +62,9 @@ Header files for webrtc-audio-processing
 %doc NEWS
 
 %changelog
+* Wed Nov 30 2022 zhouwenpei <zhouwenpei1@h-partners.com> - 1.0-6
+- Optimize the patch for add sw architecture
+
 * Mon Nov 14 2022 huajingyun <huajingyun@loongson.cn> - 1.0-5
 - Add support of loongarch64
 
