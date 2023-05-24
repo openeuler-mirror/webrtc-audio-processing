@@ -1,6 +1,6 @@
 Name:		webrtc-audio-processing
 Version:	1.0
-Release:        6
+Release:        7
 Summary:	Real-Time Communication Library for Web Browsers
 License:	BSD and MIT
 URL:		https://www.freedesktop.org/software/pulseaudio/webrtc-audio-processing/
@@ -14,6 +14,7 @@ Patch6001:      webrtc-audio-processing-1.0-sw.patch
 %ifarch loongarch64
 Patch6002:      webrtc-fix-typedefs-on-other-arches.patch
 %endif
+Patch6003:      support-riscv.patch
 BuildRequires:	autoconf automake libtool gcc gcc-c++
 BuildRequires:  meson abseil-cpp-devel cmake 
 Requires:       abseil-cpp
@@ -62,6 +63,9 @@ Header files for webrtc-audio-processing
 %doc NEWS
 
 %changelog
+* Sat May 13 2023 yoo <sunyuechi@iscas.ac.cn> - 1.0-7
+- add riscv support
+
 * Wed Nov 30 2022 zhouwenpei <zhouwenpei1@h-partners.com> - 1.0-6
 - Optimize the patch for add sw architecture
 
